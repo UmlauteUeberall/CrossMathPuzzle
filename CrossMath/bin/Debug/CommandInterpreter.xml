@@ -1,0 +1,331 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CommandInterpreter</name>
+    </assembly>
+    <members>
+        <member name="T:CommandInterpreter.CIVariable">
+            <summary>
+            Class to store Variables for CommandInterpreter
+            </summary>
+        </member>
+        <member name="F:CommandInterpreter.CIVariable.m_Value">
+            <summary>
+            Value of this Variable
+            </summary>
+        </member>
+        <member name="M:CommandInterpreter.CIVariable.#ctor(System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="_value"></param>
+        </member>
+        <member name="M:CommandInterpreter.CIVariable.ToString">
+            <summary>
+            String overload
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:CommandInterpreter.RunnableAttribute">
+            <summary>
+            </summary>
+        </member>
+        <member name="T:CommandInterpreter.CommandAttribute">
+            <summary>
+            Use this attribute to name every Command
+            </summary>
+        </member>
+        <member name="F:CommandInterpreter.CommandAttribute.Name">
+            <summary>
+            Name of this Command
+            </summary>
+        </member>
+        <member name="M:CommandInterpreter.CommandAttribute.#ctor(System.String)">
+            <summary>
+            Constructor for attribute
+            </summary>
+            <param name="_name"></param>
+        </member>
+        <member name="T:CommandInterpreter.Commands.CommandCommand">
+            <summary>
+            Use this command to load and unload commands
+            </summary>
+        </member>
+        <member name="M:CommandInterpreter.Commands.CommandCommand.Run(System.String,System.String)">
+            <summary>
+            Reads input an performs logging-tasks
+            </summary>
+            <param name="_arguments"></param>
+        </member>
+        <member name="T:CommandInterpreter.Commands.EchoCommand">
+            <summary>
+            This commands echos text to output, substitutes variables
+            </summary>
+        </member>
+        <member name="T:CommandInterpreter.Commands.ListCommand">
+            <summary>
+            Prints all loaded commands
+            </summary>
+        </member>
+        <member name="M:CommandInterpreter.Commands.ListCommand.RunCommand">
+            <summary>
+            Prints all loaded commands
+            </summary>
+            <param name="_arguments"></param>
+        </member>
+        <member name="M:CommandInterpreter.Commands.LoadCommand.RunCommand(System.String)">
+            <summary>
+            Executes all Commands in a file
+            </summary>
+            <param name="_arguments"></param>
+        </member>
+        <member name="M:CommandInterpreter.Commands.LogCommand.RunCommand">
+            <summary>
+            Reads input an performs logging-tasks
+            </summary>
+            <param name="_arguments"></param>
+        </member>
+        <member name="M:CommandInterpreter.Commands.PrintCommand.RunCommand(System.String)">
+            <summary>
+            prints a file
+            </summary>
+            <param name="_arguments"></param>
+        </member>
+        <member name="M:CommandInterpreter.Commands.SetCommand.RunCommand(System.String,System.String)">
+            <summary>
+            Reads input an performs variable setting
+            </summary>
+            <param name="_arguments"></param>
+        </member>
+        <member name="M:CommandInterpreter.Commands.ListVCommand.RunCommand">
+            <summary>
+            Prints all variables
+            </summary>
+            <param name="_arguments"></param>
+        </member>
+        <member name="T:CommandInterpreter.CommandAction">
+            <summary>
+            Delegate to run commands find an replace in CI
+            </summary>
+            <param name="_string"></param>
+            <param name="_changedSomething"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CommandInterpreter.CmdInterpreter">
+            <summary>
+            Class to controll CI, use new to generate a new CI
+            </summary>
+        </member>
+        <member name="F:CommandInterpreter.CmdInterpreter.VARIABLE_REGEX">
+            <summary>
+            Regex to find valid variable name
+            </summary>
+        </member>
+        <member name="P:CommandInterpreter.CmdInterpreter.Variables">
+            <summary>
+            Readonly variable getter
+            </summary>
+        </member>
+        <member name="P:CommandInterpreter.CmdInterpreter.LoadedCommands">
+            <summary>
+            Readonly, do not add stuff here
+            </summary>
+        </member>
+        <member name="P:CommandInterpreter.CmdInterpreter.Input">
+            <summary>
+            This is where Run takes it input if none is passed by argument
+            </summary>
+        </member>
+        <member name="E:CommandInterpreter.CmdInterpreter.InputPipe">
+            <summary>
+            Is called on every input
+            </summary>
+        </member>
+        <member name="E:CommandInterpreter.CmdInterpreter.Output">
+            <summary>
+            Is called on every output, can be called if no errormethod is specified
+            </summary>
+        </member>
+        <member name="E:CommandInterpreter.CmdInterpreter.Error">
+            <summary>
+            Is called on every error
+            </summary>
+        </member>
+        <member name="M:CommandInterpreter.CmdInterpreter.#ctor">
+            <summary>
+            Creates a new CommandInterpreter use AddProgram() and Initialize() to Run() it
+            </summary>
+        </member>
+        <member name="M:CommandInterpreter.CmdInterpreter.Clone">
+            <summary>
+            Clones Commands and Variables
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CommandInterpreter.CmdInterpreter.Initialize(System.Action{System.String},System.Action{System.String})">
+            <summary>
+            Initializes all commands, use this method whenever you add new Commands
+            Use this if you intend to run Run() with a string-parameter
+            </summary>
+            <param name="_outputMethod"></param>
+            <param name="_errorMethod"></param>
+        </member>
+        <member name="M:CommandInterpreter.CmdInterpreter.Initialize(System.Func{System.String},System.Action{System.String},System.Action{System.String})">
+            <summary>
+            Initializes all commands, use this method whenever you add new Commands
+            </summary>
+            <param name="_inputMethod"></param>
+            <param name="_outputMethod"></param>
+            <param name="_errorMethod"></param>
+        </member>
+        <member name="M:CommandInterpreter.CmdInterpreter.LoadCoreUtils">
+            <summary>
+            Loads clear, command, echo, for, help, if, list, listv, load, loadv, log, rand, savev, set, man, print, write
+            </summary>
+        </member>
+        <member name="M:CommandInterpreter.CmdInterpreter.LoadAllAvailableCommands(System.Reflection.Assembly)">
+            <summary>
+            Loads all command classes from appdomain
+            You have to load them somehow first
+            </summary>
+        </member>
+        <member name="M:CommandInterpreter.CmdInterpreter.AddProgram(CommandInterpreter.ACommand)">
+            <summary>
+            Adds a program to commandInterpreter, remember to use Initialize
+            </summary>
+            <param name="_command"></param>
+        </member>
+        <member name="M:CommandInterpreter.CmdInterpreter.AddProgram``1">
+            <summary>
+            Adds a program to commandInterpreter, remember to use Initialize
+            </summary>
+        </member>
+        <member name="M:CommandInterpreter.CmdInterpreter.RemoveProgram(CommandInterpreter.ACommand)">
+            <summary>
+            Removes a Command from CommandInterpreter
+            Uses typeof internally
+            </summary>
+            <param name="_command"></param>
+        </member>
+        <member name="M:CommandInterpreter.CmdInterpreter.RemoveProgram``1">
+            <summary>
+            Removes a Command from CommandInterpreter
+            </summary>
+        </member>
+        <member name="M:CommandInterpreter.CmdInterpreter.Run(System.String,System.Boolean)">
+            <summary>
+            Executes the CommandInterpreter
+            </summary>
+            <param name="_input">can be null, if null inputmethod will be used</param>
+            <param name="_searchForInnerCommands">shall be searched for inner commands</param>
+        </member>
+        <member name="M:CommandInterpreter.CmdInterpreter.RunInnerCommands(System.String,System.Boolean)">
+            <summary>
+            Runs inner CommandInterpreterCommands
+            </summary>
+            <param name="_input">Put input in curly braces</param>
+            <param name="_checkForInnerCommands">shall be searched for inner commands in this command</param>
+            <returns></returns>
+        </member>
+        <member name="M:CommandInterpreter.CmdInterpreter.CheckVariables(System.String)">
+            <summary>
+            Check for variables in input string
+            returns input string with variable replacement
+            if variable name does not exist it will be defaulted to empty string
+            </summary>
+            <param name="_input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CommandInterpreter.CmdInterpreter.AddVariable(System.String,System.String,System.Boolean)">
+            <summary>
+            Add or changes a variable
+            </summary>
+            <param name="_key">variable name</param>
+            <param name="_value">variable value</param>
+            <param name="_allowRestrictedNames">can variable name be a restricted name?</param>
+        </member>
+        <member name="M:CommandInterpreter.CmdInterpreter.ClearVariables">
+            <summary>
+            Clears all variables
+            </summary>
+        </member>
+        <member name="M:CommandInterpreter.CmdInterpreter.IsVariableNameRestricted(System.String)">
+            <summary>
+            Is this variable name restricted?
+            if one internal variable name is used it will return true
+            </summary>
+            <param name="_name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CommandInterpreter.CmdInterpreter.InvokeInput">
+            <summary>
+            Use this to read input
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CommandInterpreter.CmdInterpreter.InvokeOutput(System.String)">
+            <summary>
+            Use this to write output
+            </summary>
+            <param name="_output"></param>
+        </member>
+        <member name="M:CommandInterpreter.CmdInterpreter.InvokeError(System.String)">
+            <summary>
+            Use this to write error, if no error is specified it will use output
+            </summary>
+            <param name="_error"></param>
+        </member>
+        <member name="T:CommandInterpreter.ACommand">
+            <summary>
+            CommandInterface, use this for CommandInterpreter commands
+            </summary>
+        </member>
+        <member name="P:CommandInterpreter.ACommand.Name">
+            <summary>
+            Name of this command. Don't start with ^
+            </summary>
+        </member>
+        <member name="P:CommandInterpreter.ACommand.ManPage">
+            <summary>
+            Returns ManPage of this Command
+            </summary>
+        </member>
+        <member name="P:CommandInterpreter.ACommand.SubCommands">
+            <summary>
+            All SubCommands
+            </summary>
+        </member>
+        <member name="P:CommandInterpreter.ACommand.MarkedForDeletion">
+            <summary>
+            Is this element marked for deletion? it will be removed on the next call of CmdInterpreter.Run()
+            </summary>
+        </member>
+        <member name="P:CommandInterpreter.ACommand.mi_entryPointsText">
+            <summary>
+            displays entrypoint Text, use this in manpage
+            </summary>
+        </member>
+        <member name="F:CommandInterpreter.ACommand.m_owner">
+            <summary>
+            Backlink to CommandInterpreter
+            </summary>
+        </member>
+        <member name="F:CommandInterpreter.ACommand.m_initialized">
+            <summary>
+            Will be set if Initialize was run
+            </summary>
+        </member>
+        <member name="M:CommandInterpreter.ACommand.Run(System.String[])">
+            <summary>
+            Run the Command, initialize before
+            </summary>
+            <param name="_arguments"></param>
+        </member>
+        <member name="M:CommandInterpreter.ACommand.Initialize(CommandInterpreter.CmdInterpreter)">
+            <summary>
+            Initialize Command
+            </summary>
+            <param name="_owner"></param>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,422 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>plib_util</name>
+    </assembly>
+    <members>
+        <member name="M:plib.Util.Helper.Die.Roll(plib.Util.Helper.EDieType)">
+            <summary>
+            Roll the specified die.
+            </summary>
+            <param name="_die">The die.</param>
+        </member>
+        <member name="T:plib.Util.Helper.EDieType">
+            <summary>
+            The die type (How many sides a die has)
+            </summary>
+        </member>
+        <member name="M:plib.Util.MathHelper.IsPrime(System.Int32)">
+            <summary>
+            Checks if the number is a prime
+            </summary>
+            <param name="_number"></param>
+            <returns></returns>
+        </member>
+        <member name="M:plib.Util.MathHelper.AllPrimesTo(System.Int32)">
+            <summary>
+            Returns an array of all primes to _end (inclusive)
+            </summary>
+            <param name="_end"></param>
+            <returns></returns>
+        </member>
+        <member name="M:plib.Util.MathHelper.PrimeFactorization(System.Int32)">
+            <summary>
+            Returns an array of all prime factors of given input
+            </summary>
+            <param name="_number"></param>
+            <returns></returns>
+        </member>
+        <member name="M:plib.Util.MathHelper.GcdD(System.Int32,System.Int32)">
+            <summary>
+            Decomposition of Greatest Common Divisor of a and b
+            </summary>
+            <param name="_a"></param>
+            <param name="_b"></param>
+            <returns>this array {x,y,z} fullfills x = gcd(_a,_b) and y*_a + z*_b = x</returns>
+        </member>
+        <member name="M:plib.Util.MathHelper.ModInverese(System.Int32,System.Int32)">
+            <summary>
+            Modular Multiplicative Inverse 
+            </summary>
+            <param name="_k"></param>
+            <returns></returns>
+        </member>
+        <member name="M:plib.Util.FileHelper.CopyAllFromTo(System.String,System.String)">
+            <summary>
+            Copies all directories and files within the given source directory to the target directory.
+            If the files already exist they will be overriden. Exceptions are not caught.
+            </summary>
+            <param name="_sourceDirectory">The source directory whose children should be copied to the target directory.</param>
+            <param name="_targetDirectory">The target directory the files will be written to.</param>
+        </member>
+        <member name="M:plib.Util.FileHelper.HasWritePermissions(System.String)">
+            <summary>
+            Check whether you have any permissions within the given directory.
+            </summary>
+            <param name="_directoryPath">The path of the directory to check.</param>
+            <returns>True when you have file access to the given directory. False if you don't.</returns>
+        </member>
+        <member name="M:plib.Util.FileHelper.RemoveFileExtension(System.String)">
+            <summary>
+            Removes a file extension from a given path
+            </summary>
+            <param name="_path">The given path</param>
+            <returns>The path without file extensions</returns>
+        </member>
+        <member name="M:plib.Util.GenericHelper.AllSubTypes(System.Type,System.Reflection.Assembly)">
+            <summary>
+            Returns all classes inheriting from _base searching all assemblies loaded in the current AppDomain
+            </summary>
+            <param name="_base">Base class or interface</param>
+            <param name="_ass">Assembly to load specified type from, if null it will use all loaded Assemblies</param>
+            <returns></returns>
+        </member>
+        <member name="M:plib.Util.LinqHelper.ToDictionary``2(System.Collections.Generic.IEnumerable{System.Linq.IGrouping{``0,``1}})">
+            <summary>
+            Converts an enumeration of groupings into a Dictionary of those groupings.
+            </summary>
+            <typeparam name="TKey">Key type of the grouping and dictionary.</typeparam>
+            <typeparam name="TValue">Element type of the grouping and dictionary list.</typeparam>
+            <param name="_groupings">The enumeration of groupings from a GroupBy() clause.</param>
+            <returns>A dictionary of groupings such that the key of the dictionary is TKey type and the value is List of TValue type.</returns>
+        </member>
+        <member name="M:plib.Util.LinqHelper.For(System.Int32,System.Action{System.Int32})">
+            <summary>
+            Exectues a counted for loop with _target being the number of iterations.
+            </summary>
+            <param name="_target">Number of times to run _action</param>
+            <param name="_action">_action is run _target times.</param>
+        </member>
+        <member name="M:plib.Util.LinqHelper.IndexOf``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean})">
+            <summary>
+            Returns the index of the element in the _target collection where _comparer evaluates to true.
+            </summary>
+            <typeparam name="T">Typeparam of _target</typeparam>
+            <param name="_target">The _target collection on which to perform the check.</param>
+            <param name="_comparer">If _comparer evaluates to true the current index is returned.</param>
+            <returns>The index of the element in _target collection where _comparer evaluated to true or -1 if no element was found.</returns>
+        </member>
+        <member name="M:plib.Util.LinqHelper.RandomElement``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Returns a random Element, throws an IndexOutOfRangeException if _target has 0 elements
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="_target"></param>
+            <returns></returns>
+        </member>
+        <member name="M:plib.Util.LinqHelper.RandomOrDefaultElement``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Returns a random Element, return null if _target has 0 elements
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="_target"></param>
+            <returns></returns>
+        </member>
+        <member name="M:plib.Util.LinqHelper.ToLinkedList``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Returns an unordered LinkedList
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="_target"></param>
+            <returns></returns>
+        </member>
+        <member name="M:plib.Util.StringHelper.ReadableTimeSpan(System.TimeSpan,System.Boolean)">
+            <summary>
+            Returns a nice and readable string for a time span.
+            Returns a string in the format X day(s) Y hour(s) Z minutes(s) etc.
+            Use this method to display time spans e.g. "User did that [time span string] ago."
+            </summary>
+            <param name="_span">The time span from which to create the time span string.</param>
+            <param name="_getShortVersion">If provided and true returns only the highest time unit as a string omitting all smaller units. 
+            If the provided Time Span was for example 1 hour 12 minutes 33 seconds, the short version will only display 1 hour.</param>
+            <returns>The time span string or null if the provided time span is shorter than 1 second.</returns>
+        </member>
+        <member name="M:plib.Util.StringHelper.ToBraceEnd(System.String,plib.Util.StringHelper.EBracketType)">
+            <summary>
+            Returns text in brackets without them, works with nested brackets
+            </summary>
+            <param name="_input"></param>
+            <param name="_type"></param>
+        </member>
+        <member name="M:plib.Util.StringHelper.ToBraceEnd(System.String,System.Boolean@,plib.Util.StringHelper.EBracketType)">
+            <summary>
+            Returns text in brackets without them, works with nested brackets
+            </summary>
+            <param name="_input"></param>
+            <param name="_hasClosingBrace">is the last character a closing bracket</param>
+            <param name="_type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:plib.Util.StringHelper.ToBraceEnd(System.String,System.Boolean@,System.String,plib.Util.StringHelper.EBracketType)">
+            <summary>
+            Returns text in brackets without them, works with nested brackets
+            </summary>
+            <param name="_input"></param>
+            <param name="_hasClosingBrace">is the last character a closing bracket</param>
+            <param name="_escapeSequence">symbol which is used to escape input</param>
+            <param name="_type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:plib.Util.StringHelper.SimpleDecrypt(System.String,System.Byte[],System.String)">
+            <summary>
+            Decrypts a string previously encrpyted using <seealso cref="M:plib.Util.StringHelper.SimpleEncrypt(System.String,System.Byte[],System.String)"/>
+            Use password and salt used to encrypt the string.
+            </summary>
+            <param name="_input">The input string to encrpyt.</param>
+            <param name="_salt">The crypto salt. An array of random bytes to derive the key from.</param>
+            <param name="_password">An optional password from which the encryption key is derived. If no password is provided the computers MAC adress is used as password.</param>
+            <returns>A base 64, AES encrypted, string.</returns>
+            <exception cref="T:System.ArgumentException">Thrown if an invalid input or salt is provided.</exception>
+        </member>
+        <member name="M:plib.Util.StringHelper.SimpleEncrypt(System.String,System.Byte[],System.String)">
+            <summary>
+            Returns a Base64 string encrypted using Aes.
+            Password and Salt have to match while Decrypting the string using <seealso cref="M:plib.Util.StringHelper.SimpleDecrypt(System.String,System.Byte[],System.String)"/>.
+            </summary>
+            <param name="_input">The input string to encrpyt.</param>
+            <param name="_salt">The crypto salt. An array of random bytes to derive the key from. </param>
+            <param name="_password">An optional password from which the encryption key is derived. If no password is provided the computers MAC adress is used as password.</param>
+            <returns>A base 64, AES encrypted, string.</returns>
+            <exception cref="T:System.ArgumentException">Thrown if an invalid input or salt is provided.</exception>
+        </member>
+        <member name="M:plib.Util.StringHelper.IsFilenameValid(System.String)">
+            <summary>
+            Checks if a given filename is a valid Windows filename
+            </summary>
+            <param name="_filename"></param>
+            <returns></returns>
+        </member>
+        <member name="M:plib.Util.StringHelper.Parameterize(System.String)">
+            <summary>
+            Generate function-parameters from a string
+            </summary>
+            <param name="_input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:plib.Util.StringHelper.Escape(System.String,System.String,System.String)">
+            <summary>
+            Escape input sequence with _escapeChar
+            </summary>
+            <param name="_input"></param>
+            <param name="_escapeChars"></param>
+            <param name="_escapeChar"></param>
+            <returns></returns>
+        </member>
+        <member name="M:plib.Util.StringHelper.GenerateNames(System.Int32)">
+            <summary>
+            Generiert eine Reihe von Namen aus einem zufälligen pool
+            TODO: Mehr Silben hinzufügen
+            </summary>
+            <param name="_count"></param>
+            <returns></returns>
+        </member>
+        <member name="F:plib.Util.StringHelper.EBracketType.ROUND">
+            <summary>
+            ()
+            </summary>
+        </member>
+        <member name="F:plib.Util.StringHelper.EBracketType.SQUARE">
+            <summary>
+            []
+            </summary>
+        </member>
+        <member name="F:plib.Util.StringHelper.EBracketType.CURLY">
+            <summary>
+            {}
+            </summary>
+        </member>
+        <!-- Ungültiger XML-Kommentar wurde für den Member "F:plib.Util.StringHelper.EBracketType.ANGLE" ignoriert -->
+        <!-- Ungültiger XML-Kommentar wurde für den Member "T:plib.Util.L" ignoriert -->
+        <member name="P:plib.Util.L.APP_NAME">
+            <summary>
+            The name of the app this logger instance belongs to.
+            This specifies the name of the log file which results in a log file named like so:
+            (APP_NAME).log
+            </summary>
+        </member>
+        <member name="P:plib.Util.L.LOG_DIR">
+            <summary>
+            The path to the directory where the log file should be created.
+            If the directory does not exist a new directory is created.
+            </summary>
+        </member>
+        <member name="F:plib.Util.L.DEBUG">
+            <summary>
+            Sets the debug flag.
+            If true all log messages marked as [DEBUG] will be printed to the output methods/log file.
+            </summary>
+        </member>
+        <member name="M:plib.Util.L.SetLogMethods(System.Action{System.String},System.Collections.Generic.Dictionary{plib.Util.ELogType,System.Action{System.String}})">
+            <summary>
+            Used to specify the output methods for the logger.
+            </summary>
+            <param name="_loggerErr">Is called with a message if there is an error in the logger itself. Might be handy if you want to treat those logger errors differently.</param>
+            <param name="_logMap">A dictionary</param>
+        </member>
+        <member name="M:plib.Util.L.LogD(System.Object)">
+            <summary>
+            Logs the given message object to unity log, game.log and the ingame console.
+            This method will automatically specify the caller of the Log()-method as the message source.
+            This method will log a [DEBUG] message.
+            </summary>
+            <param name="_message">An object representing the message to be printed</param>
+        </member>
+        <member name="M:plib.Util.L.FLogD(System.String,System.Object[])">
+            <summary>
+            Logs the given format using string.Format() to unity log, game.log and the ingame console.
+            This method will automatically specify the caller of the Log()-method as the message source.
+            This method will log a [DEBUG] message.
+            </summary>
+            <param name="_format">The format string to use</param>
+            <param name="_args">Params to specify the used objects</param>
+            <seealso cref="M:System.String.Format(System.String,System.Object)"/>
+        </member>
+        <member name="M:plib.Util.L.Log(System.Object)">
+            <summary>
+            Logs the given message object to unity log, game.log and the ingame console.
+            This method will automatically specify the caller of the Log()-method as the message source.
+            This method will log an [INFO] message.
+            </summary>
+            <param name="_message">An object representing the message to be printed</param>
+        </member>
+        <member name="M:plib.Util.L.FLog(System.String,System.Object[])">
+            <summary>
+            Logs the given format using string.Format() to unity log, game.log and the ingame console.
+            This method will automatically specify the caller of the Log()-method as the message source.
+            This method will log a [INFO] message.
+            </summary>
+            <param name="_format">The format string to use</param>
+            <param name="_args">Params to specify the used objects</param>
+            <seealso cref="M:System.String.Format(System.String,System.Object)"/>
+        </member>
+        <member name="M:plib.Util.L.LogW(System.Object)">
+            <summary>
+            Logs the given message object to unity log, game.log and the ingame console.
+            This method will automatically specify the caller of the Log()-method as the message source.
+            This method will log a [WARNING] message.
+            </summary>
+            <param name="_message">An object representing the message to be printed</param>
+        </member>
+        <member name="M:plib.Util.L.LogE(System.Object)">
+            <summary>
+            Logs the given message object to unity log, game.log and the ingame console.
+            This method will automatically specify the caller of the Log()-method as the message source.
+            This method will log a [ERROR] message.
+            </summary>
+            <param name="_message">An object representing the message to be printed</param>
+        </member>
+        <!-- Ungültiger XML-Kommentar wurde für den Member "M:plib.Util.Logic.BoolExpressions.EvaluateBoolExpression(System.String)" ignoriert -->
+        <member name="M:plib.Util.Logic.BoolExpressions.EvalutateBoolString(System.String)">
+            <summary>
+            Evalutes a string, returns true for everything but "0", empty, null or "false"
+            uses ToLower, can understand negations
+            </summary>
+            <param name="_input"></param>
+            <returns></returns>
+        </member>
+        <member name="T:plib.Util.Threading.Dispatcher">
+            <summary>
+            Utility class to allow dispatching between Threads.
+            The Dispatcher will service the thread which calls it's <seealso cref="M:plib.Util.Threading.Dispatcher.ProcessQueue"/> method,
+            this thread will be references as "queues thread" throughout this classes comments.
+            </summary>
+        </member>
+        <member name="P:plib.Util.Threading.Dispatcher.IsQueueThread">
+            <summary>
+            Checks whether the calling thread matches this dispatcher's queue thread.
+            Will return true as long as the <seealso cref="M:plib.Util.Threading.Dispatcher.ProcessQueue"/> method has not been called yet.
+            </summary>
+        </member>
+        <member name="F:plib.Util.Threading.Dispatcher.DISPATCH_TIMEOUT_MILLIS">
+            <summary>
+            The initial timeout in milliseconds before a dispatch result is considered as lost.
+            </summary>
+        </member>
+        <member name="P:plib.Util.Threading.Dispatcher.QueueLength">
+            <summary>
+            Current number of dispatches waiting to be processed.
+            </summary>
+        </member>
+        <member name="P:plib.Util.Threading.Dispatcher.FailsSinceStartup">
+            <summary>
+            Returns the number of lost dispatches since startup.
+            A dispatch is considered lost after <seealso cref="F:plib.Util.Threading.Dispatcher.DISPATCH_TIMEOUT_MILLIS"/> milliseconds
+            without an answer.
+            </summary>
+        </member>
+        <member name="M:plib.Util.Threading.Dispatcher.ProcessQueue">
+            <summary>
+            The thread which is calling this method will become this dispatcher's queue thread.
+            For each call of ProcessQueue() one Dispatch item will be processed.
+            Always run this method from one single thread and do not switch threads after the first call to
+            this method.
+            </summary>
+        </member>
+        <member name="M:plib.Util.Threading.Dispatcher.InvokeWithWorker(System.Func{System.Object},System.Action{System.Object},System.String)">
+            <summary>
+            Invokes _action in a spawned worker thread.
+            The return value of object is returned by _result which is executed from the queues thread.
+            This method should be used to outsource heavy operations to a new worker thread.
+            Don't call this method from the main loop!
+            </summary>
+            <param name="_action">The action to perform in a new worker thread.</param>
+            <param name="_result">The resulting action which is invoked from the queues thread.</param>
+        </member>
+        <member name="M:plib.Util.Threading.Dispatcher.Dispatch(System.Action,System.String)">
+            <summary>
+            Invokes _action from the queues thread.
+            </summary>
+            <param name="_action">The action to invoke from the queues thread.</param>
+        </member>
+        <member name="M:plib.Util.Threading.Dispatcher.Dispatch(System.Action{System.Object[]},System.Object[])">
+            <summary>
+            Invokes _actionWithParams queues thread.
+            Params passed to this this method will be forwarded to the dispatch call.
+            </summary>
+            <param name="_actionWithParams">The action to invoke from the queues thread.</param>
+            <param name="_args">Params object[] for the arguments which are passed to the queues Thread.</param>
+        </member>
+        <member name="M:plib.Util.Threading.Dispatcher.DispatchSync(System.Action,System.String)">
+            <summary>
+            Dispatches a messages and waits for the message to be processed before returning.
+            This is a BLOCKING method, use with caution!
+            </summary>
+            <param name="_action">The action to be performed synchronously on the queues thread.</param>
+        </member>
+        <member name="M:plib.Util.Threading.Dispatcher.DispatchSync(System.Action{System.Object[]},System.Object[])">
+            <summary>
+            Dispatches a messages and waits for the message to be processed before returning.
+            This is a BLOCKING method, use with caution!
+            </summary>
+            <param name="_action">The action to be performed synchronously on the queues thread.</param>
+        </member>
+        <member name="M:plib.Util.Threading.Dispatcher.InvokeSync(System.Func{System.Object})">
+            <summary>
+            Invokes _action from the queues thread returning a value.
+            This is a BLOCKING method waiting for the queues thread to process _action and returning a value.
+            Use with caution!
+            </summary>
+            <param name="_action">The action to perform from the queues thread returning a value</param>
+            <returns>The object which was returned from the queues thread _action method.</returns>
+        </member>
+        <member name="M:plib.Util.Threading.Dispatcher.Invoke(System.Func{System.Object},System.Action{System.Object})">
+            <summary>
+            Invokes _action from the queues thread returning a value.
+            The _result callback is called from a spawned  worker thread which reports the result back asynchronously.
+            Don't call this method from the main loop!
+            </summary>
+            <param name="_action">The action to perform from the queues thread returning a value.</param>
+            <param name="_result">The result callback which is called from a spawned worker thread.</param>
+        </member>
+    </members>
+</doc>
