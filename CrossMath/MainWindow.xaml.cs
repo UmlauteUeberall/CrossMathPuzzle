@@ -48,7 +48,12 @@ namespace CrossMath
 
 		private void Create_button_Click(object sender, RoutedEventArgs e)
 		{
+			System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
+			sw.Start();
 			fi_createField();
+
+			sw.Stop();
+			label.Content = $"creating took {sw.Elapsed}";
 
 		}
 
@@ -56,9 +61,14 @@ namespace CrossMath
 
 		private void Solve_button_Click(object sender, RoutedEventArgs e)
 		{
+			System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
+			sw.Start();
 			//fi_updateOperants();
 			fi_readArray();
 			fi_solve();
+			sw.Stop();
+			label.Content = $"solving took {sw.Elapsed}";
+
 		}
 
 		private void fi_cleanField()
@@ -174,68 +184,66 @@ namespace CrossMath
 				case 4:
 					return '%';
 				default:
-					throw new ArgumentException("out of range");
+					MessageBox.Show("one operator is not valid", "caution");
+					return '+';
 			}
 		}
 
 		private void fi_readArray()
 		{
-			try
+
+			Regex number = new Regex(@"\d+");
+			Regex op = new Regex(@"[\+\-\*\/\%]{1}");
+
+			if (!(number.IsMatch(result_h_1.Text)
+				&& number.IsMatch(result_h_2.Text)
+				&& number.IsMatch(result_h_3.Text)
+				&& number.IsMatch(result_v_1.Text)
+				&& number.IsMatch(result_v_2.Text)
+				&& number.IsMatch(result_v_3.Text)))
 			{
-
-				Regex number = new Regex(@"\d+");
-				Regex op = new Regex(@"[\+\-\*\/\%]{1}");
-
-				if (!(number.IsMatch(result_h_1.Text)
-					&& number.IsMatch(result_h_2.Text)
-					&& number.IsMatch(result_h_3.Text)
-					&& number.IsMatch(result_v_1.Text)
-					&& number.IsMatch(result_v_2.Text)
-					&& number.IsMatch(result_v_3.Text)))
-				{
-					throw new System.ArgumentException();
-				}
-
-				mi_hResults[0] = int.Parse(result_h_1.Text);
-				mi_hResults[1] = int.Parse(result_h_2.Text);
-				mi_hResults[2] = int.Parse(result_h_3.Text);
-
-				mi_vResults[0] = int.Parse(result_v_1.Text);
-				mi_vResults[1] = int.Parse(result_v_2.Text);
-				mi_vResults[2] = int.Parse(result_v_3.Text);
-
-				if (!(op.IsMatch(operator_h_1_1.Text)
-					&& op.IsMatch(operator_h_1_2.Text)
-					&& op.IsMatch(operator_h_2_1.Text)
-					&& op.IsMatch(operator_h_2_2.Text)
-					&& op.IsMatch(operator_h_3_1.Text)
-					&& op.IsMatch(operator_h_3_2.Text)
-					&& op.IsMatch(operator_v_1_1.Text)
-					&& op.IsMatch(operator_v_1_2.Text)
-					&& op.IsMatch(operator_v_1_3.Text)
-					&& op.IsMatch(operator_v_2_1.Text)
-					&& op.IsMatch(operator_v_2_2.Text)
-					&& op.IsMatch(operator_v_2_3.Text)))
-				{
-					throw new System.ArgumentException();
-				}
-
-				mi_hOperators[0, 0] = char.Parse(operator_h_1_1.Text);
-				mi_hOperators[0, 1] = char.Parse(operator_h_1_2.Text);
-				mi_hOperators[1, 0] = char.Parse(operator_h_2_1.Text);
-				mi_hOperators[1, 1] = char.Parse(operator_h_2_2.Text);
-				mi_hOperators[2, 0] = char.Parse(operator_h_3_1.Text);
-				mi_hOperators[2, 1] = char.Parse(operator_h_3_2.Text);
-
-				mi_vOperators[0, 0] = char.Parse(operator_v_1_1.Text);
-				mi_vOperators[0, 1] = char.Parse(operator_v_2_1.Text);
-				mi_vOperators[1, 0] = char.Parse(operator_v_1_2.Text);
-				mi_vOperators[1, 1] = char.Parse(operator_v_2_2.Text);
-				mi_vOperators[2, 0] = char.Parse(operator_v_1_3.Text);
-				mi_vOperators[2, 1] = char.Parse(operator_v_2_3.Text);
+				MessageBox.Show("one result is not valid", "caution");
+				return;
 			}
-			catch (System.NullReferenceException)
-			{ }
+
+			mi_hResults[0] = int.Parse(result_h_1.Text);
+			mi_hResults[1] = int.Parse(result_h_2.Text);
+			mi_hResults[2] = int.Parse(result_h_3.Text);
+
+			mi_vResults[0] = int.Parse(result_v_1.Text);
+			mi_vResults[1] = int.Parse(result_v_2.Text);
+			mi_vResults[2] = int.Parse(result_v_3.Text);
+
+			if (!(op.IsMatch(operator_h_1_1.Text)
+				&& op.IsMatch(operator_h_1_2.Text)
+				&& op.IsMatch(operator_h_2_1.Text)
+				&& op.IsMatch(operator_h_2_2.Text)
+				&& op.IsMatch(operator_h_3_1.Text)
+				&& op.IsMatch(operator_h_3_2.Text)
+				&& op.IsMatch(operator_v_1_1.Text)
+				&& op.IsMatch(operator_v_1_2.Text)
+				&& op.IsMatch(operator_v_1_3.Text)
+				&& op.IsMatch(operator_v_2_1.Text)
+				&& op.IsMatch(operator_v_2_2.Text)
+				&& op.IsMatch(operator_v_2_3.Text)))
+			{
+				MessageBox.Show("one operator is not valid", "caution");
+				return;
+			}
+
+			mi_hOperators[0, 0] = char.Parse(operator_h_1_1.Text);
+			mi_hOperators[0, 1] = char.Parse(operator_h_1_2.Text);
+			mi_hOperators[1, 0] = char.Parse(operator_h_2_1.Text);
+			mi_hOperators[1, 1] = char.Parse(operator_h_2_2.Text);
+			mi_hOperators[2, 0] = char.Parse(operator_h_3_1.Text);
+			mi_hOperators[2, 1] = char.Parse(operator_h_3_2.Text);
+
+			mi_vOperators[0, 0] = char.Parse(operator_v_1_1.Text);
+			mi_vOperators[0, 1] = char.Parse(operator_v_2_1.Text);
+			mi_vOperators[1, 0] = char.Parse(operator_v_1_2.Text);
+			mi_vOperators[1, 1] = char.Parse(operator_v_2_2.Text);
+			mi_vOperators[2, 0] = char.Parse(operator_v_1_3.Text);
+			mi_vOperators[2, 1] = char.Parse(operator_v_2_3.Text);
 		}
 
 		private void fi_solve()
@@ -305,38 +313,38 @@ namespace CrossMath
 
 					for (int third = 0; third < possiblePairs[2].Count; third++)
 					{
-							for (int i = 0; i < 3; i++)
-							{
-								ver[i].SetConstants(possiblePairs[2][third].Item1, possiblePairs[2][third].Item2, possiblePairs[2][third].Item3);
-								values[i] = (int)((ContainerList)ver[i].Clone()).Calculate();
-							}
+						for (int i = 0; i < 3; i++)
+						{
+							ver[i].SetConstants(possiblePairs[2][third].Item1, possiblePairs[2][third].Item2, possiblePairs[2][third].Item3);
+							values[i] = (int)((ContainerList)ver[i].Clone()).Calculate();
+						}
 
-							if (values[0] == mi_vResults[0]
-								&& (values[1] == mi_vResults[1])
-								&& (values[2] == mi_vResults[2]))
-							{
+						if (values[0] == mi_vResults[0]
+							&& (values[1] == mi_vResults[1])
+							&& (values[2] == mi_vResults[2]))
+						{
 
-								mi_operants[0, 0] = (int) possiblePairs[0][first].Item1.mu_value;
-								mi_operants[0, 1] = (int) possiblePairs[0][first].Item2.mu_value;
-								mi_operants[0, 2] = (int) possiblePairs[0][first].Item3.mu_value;
+							mi_operants[0, 0] = (int)possiblePairs[0][first].Item1.mu_value;
+							mi_operants[0, 1] = (int)possiblePairs[0][first].Item2.mu_value;
+							mi_operants[0, 2] = (int)possiblePairs[0][first].Item3.mu_value;
 
-								mi_operants[1, 0] = (int)possiblePairs[1][second].Item1.mu_value;
-								mi_operants[1, 1] = (int)possiblePairs[1][second].Item2.mu_value;
-								mi_operants[1, 2] = (int)possiblePairs[1][second].Item3.mu_value;
+							mi_operants[1, 0] = (int)possiblePairs[1][second].Item1.mu_value;
+							mi_operants[1, 1] = (int)possiblePairs[1][second].Item2.mu_value;
+							mi_operants[1, 2] = (int)possiblePairs[1][second].Item3.mu_value;
 
-								mi_operants[2, 0] = (int)possiblePairs[2][third].Item1.mu_value;
-								mi_operants[2, 1] = (int)possiblePairs[2][third].Item2.mu_value;
-								mi_operants[2, 2] = (int)possiblePairs[2][third].Item3.mu_value;
+							mi_operants[2, 0] = (int)possiblePairs[2][third].Item1.mu_value;
+							mi_operants[2, 1] = (int)possiblePairs[2][third].Item2.mu_value;
+							mi_operants[2, 2] = (int)possiblePairs[2][third].Item3.mu_value;
 
-								fi_updateOperants();
+							fi_updateOperants();
 
-								return;
-							}
+							return;
+						}
 					}
 				}
 			}
 
-			throw new System.NotImplementedException();
+			MessageBox.Show("there is no valid solution","caution");
 
 		}
 	}

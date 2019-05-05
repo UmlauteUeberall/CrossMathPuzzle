@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CrossMath"
         mc:Ignorable="d"
-        Title="MainWindow" Height="380" Width="364" ResizeMode="NoResize">
+        Title="MainWindow" Height="403.824" Width="364" ResizeMode="NoResize">
     <Grid>
         <TextBox x:Name="operant_1_1" HorizontalAlignment="Left" Height="36" Margin="10,10,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="36"  FontSize="20" IsEnabled="False" />
         <TextBox x:Name="operant_1_2" HorizontalAlignment="Left" Height="36" Margin="93,10,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="36" FontSize="20" IsEnabled="False" />
@@ -47,6 +47,16 @@
         <Button x:Name="create_button" Content="create" HorizontalAlignment="Left" Margin="93,312,0,0" VerticalAlignment="Top" Width="75" Click="Create_button_Click"/>
         <Button x:Name="solve_button" Content="solve" HorizontalAlignment="Left" Margin="217,312,0,0" VerticalAlignment="Top" Width="75" Click="Solve_button_Click"/>
         <Button x:Name="clean_button" Content="clean" HorizontalAlignment="Left" Margin="10,312,0,0" VerticalAlignment="Top" Width="75" Click="Clean_button_Click"/>
+        <StatusBar Margin="0,339,0,0" >
+            <StatusBar.RenderTransform>
+                <TransformGroup>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </StatusBar.RenderTransform>
+            <Label x:Name="label" Content="" Height="55"/>
+        </StatusBar>
 
     </Grid>
 </Window>
